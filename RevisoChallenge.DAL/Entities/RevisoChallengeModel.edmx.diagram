@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="428df62eeca44b2bba07357ac9d6bcdb" Name="Diagram1">
+        <EntityTypeShape EntityType="RevisoChallenge.DAL.Client" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RevisoChallenge.DAL.Invoice" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RevisoChallenge.DAL.Project" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RevisoChallenge.DAL.Task" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <AssociationConnector Association="RevisoChallenge.DAL.FK_Project_ToClient" ManuallyRouted="false" />
+        <AssociationConnector Association="RevisoChallenge.DAL.FK_Invoice_ToProject" ManuallyRouted="false" />
+        <AssociationConnector Association="RevisoChallenge.DAL.FK_Task_ToProject" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
