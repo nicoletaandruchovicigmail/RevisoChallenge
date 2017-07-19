@@ -10,7 +10,6 @@ namespace RevisoChallenge.Models
         {
             Name = project.Name;
             ClientId = project.ClientId;
-
         }
 
         public int Id { get; set; }

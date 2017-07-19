@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevisoChallenge.DAL", "Revi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevisoChallenge.DAL.Tests", "RevisoChallenge.DAL.Tests\RevisoChallenge.DAL.Tests.csproj", "{DFF87AEE-FEC5-4C9C-BF0A-6FC9A6EEFFAA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactTest", "ReactTest\ReactTest.csproj", "{D0FE35E9-0888-4BB1-931D-1D560860D9DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DFF87AEE-FEC5-4C9C-BF0A-6FC9A6EEFFAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFF87AEE-FEC5-4C9C-BF0A-6FC9A6EEFFAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFF87AEE-FEC5-4C9C-BF0A-6FC9A6EEFFAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0FE35E9-0888-4BB1-931D-1D560860D9DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0FE35E9-0888-4BB1-931D-1D560860D9DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0FE35E9-0888-4BB1-931D-1D560860D9DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0FE35E9-0888-4BB1-931D-1D560860D9DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
