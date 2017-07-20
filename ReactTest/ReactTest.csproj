@@ -244,6 +244,8 @@
     <Content Include="bower_components\bootstrap\dist\css\bootstrap.min.css" />
     <Content Include="bower_components\bootstrap\dist\js\bootstrap.js" />
     <Content Include="bower_components\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Scripts\Code snippets\checkBoxStates.jsx" />
+    <Content Include="Scripts\Code snippets\CommentAddNew.jsx" />
     <Content Include="Scripts\Code snippets\Get.jsx" />
     <Content Include="Style\Comment.css" />
     <Content Include="packages.config" />
