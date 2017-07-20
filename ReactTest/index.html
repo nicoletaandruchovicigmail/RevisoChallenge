@@ -4,35 +4,41 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="Style/Comment.css">
 </head>
 <body>
     <div id="container"></div>
-<script type="text/babel">  
-    var Comment = React.createClass({
-    edit: function() {
-        alert('Editing comment');
+    <script type="text/babel">  
+    var App = React.createClass({
+        getInitialState: function() {
+            return{ data: [] };
+        },
+
+    componentWillMount: function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("get", this.props.url, true);
+        xhr.onload = function() {
+            var webAPIData = JSON.parse(xhr.responseText);
+            this.setState({ data: webAPIData });
+        }.bind(this);
+        xhr.send();
     },
-    remove: function () {
-        alert('Removing comment');
-    },
-    render: function () {
+
+    render: function() {
     return (
-    <div className="commentContainer">
-        <div className="comment">{this.props.children}</div>
-        <button onClick={this.edit} className="button-primary">Edit</button>
-        <button onClick={this.remove} className="button-danger">Remove</button>
+    <div>
+        <h2>Name: {this.state.data.Name}</h2>
+        <h2>Desc: {this.state.data.Description}</h2>
+        <h2>Start: {this.state.data.Start}</h2>
     </div>
     );
     }
     });
 
     ReactDOM.render(
-    <div className="board">
-        <Comment>Comment1</Comment>
-        <Comment>Comment2</Comment>
-        <Comment>Comment3</Comment>
-    </div>, document.getElementById('container'));
+    <App url="http://localhost:53438/api/values/3" />, document.getElementById("container"));
 </script>
 </body>
 </html>

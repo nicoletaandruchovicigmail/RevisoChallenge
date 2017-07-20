@@ -236,8 +236,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bower_components\bootstrap\dist\css\bootstrap-grid.css" />
+    <Content Include="bower_components\bootstrap\dist\css\bootstrap-grid.min.css" />
+    <Content Include="bower_components\bootstrap\dist\css\bootstrap-reboot.css" />
+    <Content Include="bower_components\bootstrap\dist\css\bootstrap-reboot.min.css" />
+    <Content Include="bower_components\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="bower_components\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="bower_components\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="bower_components\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Scripts\Code snippets\Get.jsx" />
     <Content Include="Style\Comment.css" />
     <Content Include="packages.config" />
+    <Content Include="bower_components\bootstrap\dist\css\bootstrap-grid.css.map" />
+    <Content Include="bower_components\bootstrap\dist\css\bootstrap-grid.min.css.map" />
+    <Content Include="bower_components\bootstrap\dist\css\bootstrap-reboot.css.map" />
+    <Content Include="bower_components\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
+    <Content Include="bower_components\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="bower_components\bootstrap\dist\css\bootstrap.min.css.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
