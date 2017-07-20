@@ -58,6 +58,12 @@ var Board = React.createClass({
         }
     },
 
+    addComment: function (defaultText) {
+        var arr = this.state.comments;
+        arr.push(defaultText);
+        this.setState({ comments: arr })
+    },
+
     removeComment: function (i) {
         console.log('Removing comment: ' + i);
         var arr = this.state.comments;
@@ -84,7 +90,7 @@ var Board = React.createClass({
     render: function () {
         return (
             <div>
-                <button className="button-info create">Add new</button>
+                <button onClick={this.addComment.bind(null, "New Comment")} className="button-info create">Add new</button>
                 <div className="Board">
                     {this.state.comments.map(this.eachComment)}
                 </div>

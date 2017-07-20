@@ -236,6 +236,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\Code snippets\checkBoxStates.jsx" />
+    <Content Include="Scripts\Code snippets\commentAddNew.jsx" />
     <Content Include="Style\Comment.css" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
