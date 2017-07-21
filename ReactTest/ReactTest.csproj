@@ -236,23 +236,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bower_components\bootstrap\dist\css\bootstrap-grid.css" />
-    <Content Include="bower_components\bootstrap\dist\css\bootstrap-grid.min.css" />
-    <Content Include="bower_components\bootstrap\dist\css\bootstrap-reboot.css" />
-    <Content Include="bower_components\bootstrap\dist\css\bootstrap-reboot.min.css" />
+    <Content Include="bower_components\bootstrap\dist\css\bootstrap-def.css" />
     <Content Include="bower_components\bootstrap\dist\css\bootstrap.css" />
     <Content Include="bower_components\bootstrap\dist\css\bootstrap.min.css" />
     <Content Include="bower_components\bootstrap\dist\js\bootstrap.js" />
     <Content Include="bower_components\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="create.html" />
     <Content Include="Scripts\Code snippets\checkBoxStates.jsx" />
     <Content Include="Scripts\Code snippets\CommentAddNew.jsx" />
     <Content Include="Scripts\Code snippets\Get.jsx" />
     <Content Include="Style\Comment.css" />
     <Content Include="packages.config" />
-    <Content Include="bower_components\bootstrap\dist\css\bootstrap-grid.css.map" />
-    <Content Include="bower_components\bootstrap\dist\css\bootstrap-grid.min.css.map" />
-    <Content Include="bower_components\bootstrap\dist\css\bootstrap-reboot.css.map" />
-    <Content Include="bower_components\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
     <Content Include="bower_components\bootstrap\dist\css\bootstrap.css.map" />
     <Content Include="bower_components\bootstrap\dist\css\bootstrap.min.css.map" />
     <None Include="Web.Debug.config">
@@ -265,7 +259,7 @@
   <ItemGroup>
     <None Include="Scripts\_references.js" />
     <Content Include="favicon.ico" />
-    <Content Include="index.html" />
+    <Content Include="index_html.html" />
     <Content Include="Scripts\bootstrap.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Code snippets\commentEvents.jsx" />
@@ -316,6 +310,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties bower_3components_4bootstrap_4dist_4css_4bootstrap_1min_1css_1map__JSONSchema="" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
