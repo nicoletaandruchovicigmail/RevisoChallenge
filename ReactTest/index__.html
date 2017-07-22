@@ -1,0 +1,62 @@
+﻿<html>
+<head>
+    <title>Hello React</title>   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="Style/Comment.css">
+</head>
+<body>   
+var App = React.createClass({
+getInitialState: function() {
+return { data: [] };
+},
+
+componentWillMount: function() {
+var xhr = new XMLHttpRequest();
+xhr.open("get", this.props.url, true);
+xhr.onload = function() {
+var webAPIData = JSON.parse(xhr.responseText);
+this.setState({ data: webAPIData });
+}.bind(this);
+xhr.send();
+},
+
+render: function() {
+return (
+<div>
+    <h2>Name: { this.state.data.Name } </h2>
+    <h2> Desc: { this.state.data.Description } </h2>
+    <h2> Start: { this.state.data.Start } </h2>
+</div>
+);
+}
+});
+
+ReactDOM.render(
+<App url="http://localhost:53438/api/values/3"/>,
+document.getElementById("container"));
+</body>
+</html>
+
+
+
+<table class="table preview-table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Client</th>
+        <th>Cost</th>
+        <th>Completed</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr id="project">
+    </tr>
+    </tbody> <!-- preview content goes here-->
+</table>

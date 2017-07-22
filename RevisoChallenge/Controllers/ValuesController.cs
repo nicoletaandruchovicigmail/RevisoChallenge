@@ -11,9 +11,23 @@ namespace RevisoChallenge.Controllers
     public class ValuesController : ApiController
     {
         // GET api/values
-        public IEnumerable<string> Get()
+        public HttpResponseMessage Get()
         {
-            return new[] {"value1", "value2"};
+            var services = new DalServices();
+
+            var ceva = new List<ProjectViewModel>();
+            foreach (var project in services.GetProjects())
+            {
+                ceva.Add(new ProjectViewModel(project));
+            }
+            var jsonString = JsonConvert.SerializeObject(ceva);
+
+            var resp = new HttpResponseMessage
+            {
+                Content = new StringContent(jsonString)
+            };
+            resp.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            return resp;
         }
 
         // GET api/values/5

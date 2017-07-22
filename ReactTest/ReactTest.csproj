@@ -242,6 +242,8 @@
     <Content Include="bower_components\bootstrap\dist\js\bootstrap.js" />
     <Content Include="bower_components\bootstrap\dist\js\bootstrap.min.js" />
     <Content Include="create.html" />
+    <Content Include="index.html" />
+    <Content Include="index__.html" />
     <Content Include="Scripts\Code snippets\checkBoxStates.jsx" />
     <Content Include="Scripts\Code snippets\CommentAddNew.jsx" />
     <Content Include="Scripts\Code snippets\Get.jsx" />
@@ -259,7 +261,7 @@
   <ItemGroup>
     <None Include="Scripts\_references.js" />
     <Content Include="favicon.ico" />
-    <Content Include="index_html.html" />
+    <Content Include="index_old1.html" />
     <Content Include="Scripts\bootstrap.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Code snippets\commentEvents.jsx" />

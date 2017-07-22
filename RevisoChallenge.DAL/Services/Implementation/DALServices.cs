@@ -36,6 +36,14 @@ namespace RevisoChallenge.DAL.Services.Implementation
             context.SaveChanges();
         }
 
+        public Client GetClient(int id)
+        {
+            var context = new RevisoChallengeEntities();
+            IClientDbRepository clientRepository = new ClientDbRepository(context);
+
+            return clientRepository.Get(id);
+        }
+
         void AddTask(Task task)
         {
             DbContext context = new RevisoChallengeEntities();

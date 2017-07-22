@@ -1,29 +1,138 @@
-﻿<html>
+﻿<!DOCTYPE html>
+<html>
 <head>
-    <title>Hello React</title>   
+    <title>Hello Ms. Freelancer</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="Scripts/jquery-1.10.2.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="Style/Comment.css">
 </head>
-<body>   
-<div class="row">		
-    <div class="section-title col-md-10">			
-        <h3>Add project</h3>		
-    </div>		
-    <div class="col-md-12">			
-        <hr>		
-    </div>	
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Logo</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Overview</a></li>
+                <li><a href="create.html">Create new</a></li>
+                <li><a href="#">Clients</a></li>
+                <li><a href="#">Invoices</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid text-left">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+        </div>
+        <div class="col-sm-8 text-left">
+            <h1>Projects overview</h1>
+            <hr style="border: 0px">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table-responsive" id="project">
+                        <!-- result from React get goes here--> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <hr style="border: 1px dashed #dddddd;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 sidenav">
+        </div>
+    </div>
 </div>
+
+<script type="text/babel">
+    var App = React.createClass({
+    getInitialState: function() {
+    return {
+            data: []
+           };
+    },
+
+    componentWillMount: function() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("get", this.props.url, true);
+    xhr.onload = function() {
+    var webAPIData = JSON.parse(xhr.responseText);
+    this.setState({ data: webAPIData });
+    }.bind(this);
+    xhr.send();
+    },
+
+    render: function () {
+        if (!this.state.data) {
+        return null;
+        }
+        console.log(this.state.data);
     
-<div class="form-group ">				
-    <label class="col-md-2 control-label">Project</label>
-    <input type="text" class="form-control ng-valid ng-dirty" ng-model="item" ng-disabled="disabled" ng-time="" ng-model-onblur="">
+    var rows = [];
+    this.state.data.forEach(function(project) {
+    var startDate = project.Start.substring(0,10);
+    var endDate;
+    if (project.End != null)
+        endDate = project.End.substring(0,10);
+    else
+        endDate='-';
     
-    <label class="col-md-1 control-label">Task</label>					
-</div>
+    rows.push(
+    <tr key={project.Id}>
+        <td>{project.Name}</td>
+        <td>{project.Description}</td>
+        <td>{startDate}</td>
+        <td>{endDate}</td>
+        <td>{project.ClientName}</td>
+        <td>{project.CostPerHour} DKK</td>
+        <td>Yes/No</td>
+        <td>
+            <div>
+                <a href="#"> <span className="glyphicon glyphicon-pencil"></span></a>
+            </div>
+        </td>
+    </tr>);
+        });
+        return (
+            <table className="table preview-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Client</th>
+                        <th>Cost</th>
+                        <th>Completed</th>
+                    </tr>
+                </thead>
+                
+                <tbody>{rows}</tbody>
+            </table>
+        );
+    }
+    });
+
+    ReactDOM.render(
+    <App url="http://localhost:53438/api/values/" />,
+    document.getElementById("project"));
+    
+</script>
+
+
 </body>
 </html>
-
