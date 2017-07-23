@@ -22,10 +22,10 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Overview</a></li>
+                <li class="active"><a href="index.html">Overview</a></li>
                 <li><a href="create.html">Create new</a></li>
-                <li><a href="#">Clients</a></li>
-                <li><a href="#">Invoices</a></li>
+                <li><a href="clients.html">Clients</a></li>
+                <li><a href="invoice.html">Invoices</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -75,6 +75,10 @@
     }.bind(this);
     xhr.send();
     },
+    
+    openProject: function(){
+        console.log('Edit button clicked');
+    },
 
     render: function () {
         if (!this.state.data) {
@@ -102,7 +106,7 @@
         <td>Yes/No</td>
         <td>
             <div>
-                <a href="#"> <span className="glyphicon glyphicon-pencil"></span></a>
+                <a href="tasks.html"> <span className="glyphicon glyphicon-pencil"></span></a>
             </div>
         </td>
     </tr>);
@@ -118,6 +122,7 @@
                         <th>Client</th>
                         <th>Cost</th>
                         <th>Completed</th>
+                        <th></th>
                     </tr>
                 </thead>
                 

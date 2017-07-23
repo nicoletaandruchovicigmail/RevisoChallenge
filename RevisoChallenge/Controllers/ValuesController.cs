@@ -1,13 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Newtonsoft.Json;
+using RevisoChallenge.DAL.Entities;
 using RevisoChallenge.DAL.Services.Implementation;
 using RevisoChallenge.Models;
 
 namespace RevisoChallenge.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ValuesController : ApiController
     {
         // GET api/values
@@ -47,8 +52,27 @@ namespace RevisoChallenge.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody] string value)
+        public void Post([FromBody] DummyModel project)
         {
+           // var ceva = new System.IO.StreamReader(HttpContext.Current.Request.InputStream).ReadToEnd();
+            if (project != null)
+            {
+                if (project.Name != null)
+                {
+                    var newProject = new Project()
+                    {
+                        Name = project.Name,
+                        Description = project.Description,
+                        
+                        //to be replaced with real data
+                        Start = DateTime.Now,
+                        ClientId = 1,
+                        CostPerHour=100
+                    };
+                    var services = new DalServices();
+                    services.AddProject(newProject);
+                }
+            }
         }
 
         // PUT api/values/5

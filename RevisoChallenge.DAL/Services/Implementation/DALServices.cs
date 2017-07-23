@@ -33,13 +33,39 @@ namespace RevisoChallenge.DAL.Services.Implementation
             var context = new RevisoChallengeEntities();
             IProjectDbRepository projectRepository = new ProjectDbRepository(context);
             projectRepository.Create(project);
+
             context.SaveChanges();
         }
+
+        public IList<Client> GetClients()
+        {
+            var context = new RevisoChallengeEntities();
+            IClientDbRepository clientRepository = new ClientDbRepository(context);
+
+            return clientRepository.GetAll();
+        }
+
 
         public Client GetClient(int id)
         {
             var context = new RevisoChallengeEntities();
             IClientDbRepository clientRepository = new ClientDbRepository(context);
+
+            return clientRepository.Get(id);
+        }
+
+        public IList<Task> GetTasks()
+        {
+            var context = new RevisoChallengeEntities();
+            ITaskDbRepository taskRepository = new TaskDbRepository(context);
+
+            return taskRepository.GetAll();
+        }
+
+        public Task GetTask(int id)
+        {
+            var context = new RevisoChallengeEntities();
+            ITaskDbRepository clientRepository = new TaskDbRepository(context);
 
             return clientRepository.Get(id);
         }
