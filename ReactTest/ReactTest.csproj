@@ -244,14 +244,11 @@
     <Content Include="clients.html" />
     <Content Include="create.html" />
     <Content Include="create_ReactBackup.html" />
+    <Content Include="doesnt_work.html" />
     <Content Include="index.html" />
-    <Content Include="index__.html" />
     <Content Include="invoice.html" />
-    <Content Include="Scripts\Code snippets\checkBoxStates.jsx" />
-    <Content Include="Scripts\Code snippets\CommentAddNew.jsx" />
-    <Content Include="Scripts\Code snippets\Get.jsx" />
-    <Content Include="Scripts\projectManager.js" />
-    <Content Include="Style\Comment.css" />
+    <Content Include="menu.html" />
+    <Content Include="Images\sorrowful-emoji.png" />
     <Content Include="packages.config" />
     <Content Include="bower_components\bootstrap\dist\css\bootstrap.css.map" />
     <Content Include="bower_components\bootstrap\dist\css\bootstrap.min.css.map" />
@@ -263,15 +260,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\_references.js" />
-    <Content Include="favicon.ico" />
-    <Content Include="index_old1.html" />
+    <Content Include="Images\favicon.ico" />
     <Content Include="Scripts\bootstrap.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\Code snippets\commentEvents.jsx" />
-    <Content Include="Scripts\Code snippets\movie.jsx" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\projectManager.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Scripts\react\react-dom-server.js" />
     <Content Include="Scripts\react\react-dom-server.min.js" />
     <Content Include="Scripts\react\react-dom.js" />
@@ -280,7 +275,6 @@
     <Content Include="Scripts\react\react-with-addons.min.js" />
     <Content Include="Scripts\react\react.js" />
     <Content Include="Scripts\react\react.min.js" />
-    <Content Include="Scripts\Code snippets\test.jsx" />
     <Content Include="tasks.html" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -293,6 +287,7 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -12,30 +12,7 @@
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Logo</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li><a href="index.html">Overview</a></li>
-                <li  class="active"><a href="create.html">Create new</a></li>
-                <li><a href="clients.html">Clients</a></li>
-                <li><a href="invoice.html">Invoices</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
+<iframe src="menu.html" style="border: none; width: 100%; height: 50px;" scrolling="no"></iframe>
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
@@ -58,21 +35,21 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="date" class="col-sm-3 control-label">Start date</label>
+                        <label for="startdate" class="col-sm-3 control-label">Start date</label>
                         <div class="col-sm-9">
                             <input type="date" class="form-control" id="startdate" name="startdate">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="date" class="col-sm-3 control-label">End date</label>
+                        <label for="enddate" class="col-sm-3 control-label">End date</label>
                         <div class="col-sm-9">
                             <input type="date" class="form-control" id="enddate" name="enddate">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="status" class="col-sm-3 control-label">Client</label>
+                        <label for="client" class="col-sm-3 control-label">Client</label>
                         <div class="col-sm-9">
-                            <select class="form-control" id="status" name="status">
+                            <select class="form-control" id="client" name="client">
                                 <option>Client 1</option>
                                 <option>Client 2</option>
                                 <option>Client 3</option>
@@ -81,15 +58,15 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="amount" class="col-sm-3 control-label">Cost (DKK)</label>
+                        <label for="cost" class="col-sm-3 control-label">Cost (DKK)</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="amount" name="amount">
+                            <input type="number" class="form-control" id="cost" name="cost">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12 text-right" id="addProject">
                             <button class="btn btn-default preview-add-button" id="btnAddProject">
-                                <span class="glyphicon glyphicon-plus"></span> Add
+                                <span class="glyphicon glyphicon-floppy-save"></span> Create
                             </button>
                         </div>
                     </div>

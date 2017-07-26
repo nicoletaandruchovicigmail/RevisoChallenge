@@ -16,8 +16,11 @@ namespace RevisoChallenge.Models
             Description = task.Description;
             EstimatedHours = task.EstimatedHours;
             ActualHours = task.ActualHours;
+            End = task.End;            
             ProjectId = task.ProjectId;
             ProjectName = GetProjectName(ProjectId);
+            Cost = GetTaskCostPerHour();
+            Completed = IsTaskCompleted();
         }
 
         public int Id { get; set; }
@@ -26,19 +29,34 @@ namespace RevisoChallenge.Models
         public int EstimatedHours { get; set; }
         public int? ActualHours { get; set; }
         public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+        public DateTime? End { get; set; }
         public int ProjectId { get; set; }
         public string ProjectName { get; set; }
+        public decimal Cost { get; set; }
+        public bool Completed { get; set; }
 
         public string GetProjectName(int projectId)
         {
             var service = new DalServices();
             var project = service.GetProject(ProjectId);
 
-            if (project != null)
-                return project.Name;
-            else
-                return String.Empty;
+            return project != null ? project.Name : string.Empty;
+        }
+
+        private decimal GetTaskCostPerHour()
+        {
+            var service = new DalServices();
+            var project = service.GetProject(ProjectId);
+
+            return project.CostPerHour;
+        }
+
+        private bool IsTaskCompleted()
+        {
+            // needs a more clever implementation 
+            if (End.HasValue && End != default(DateTime))
+                return true;
+            return false;
         }
     }
 }

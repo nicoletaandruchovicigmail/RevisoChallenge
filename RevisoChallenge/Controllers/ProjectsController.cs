@@ -13,9 +13,9 @@ using RevisoChallenge.Models;
 namespace RevisoChallenge.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class ValuesController : ApiController
+    public class ProjectsController : ApiController
     {
-        // GET api/values
+        // GET api/projects
         public HttpResponseMessage Get()
         {
             var services = new DalServices();
@@ -35,7 +35,7 @@ namespace RevisoChallenge.Controllers
             return resp;
         }
 
-        // GET api/values/5
+        // GET api/projects/5
         public HttpResponseMessage Get(int id)
         {
             var services = new DalServices();
@@ -51,10 +51,9 @@ namespace RevisoChallenge.Controllers
             return resp;
         }
 
-        // POST api/values
-        public void Post([FromBody] DummyModel project)
+        // POST api/projects
+        public void Post([FromBody] ProjectViewModel project)
         {
-           // var ceva = new System.IO.StreamReader(HttpContext.Current.Request.InputStream).ReadToEnd();
             if (project != null)
             {
                 if (project.Name != null)
@@ -64,10 +63,12 @@ namespace RevisoChallenge.Controllers
                         Name = project.Name,
                         Description = project.Description,
                         
-                        //to be replaced with real data
-                        Start = DateTime.Now,
+                        Start = project.Start,
+                        End = project.End,
+
+                        //todo populate client with value from request 
                         ClientId = 1,
-                        CostPerHour=100
+                        CostPerHour=(decimal) project.Cost
                     };
                     var services = new DalServices();
                     services.AddProject(newProject);
@@ -75,12 +76,12 @@ namespace RevisoChallenge.Controllers
             }
         }
 
-        // PUT api/values/5
+        // PUT api/projects/5
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/values/5
+        // DELETE api/projects/5
         public void Delete(int id)
         {
         }

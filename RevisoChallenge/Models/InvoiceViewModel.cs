@@ -4,7 +4,6 @@ using RevisoChallenge.DAL.Services.Implementation;
 
 namespace RevisoChallenge.Models
 {
-    [Serializable]
     public class InvoiceViewModel
     {
         public InvoiceViewModel() { }
@@ -14,8 +13,7 @@ namespace RevisoChallenge.Models
             Id = invoice.Id;
             ProjectId = invoice.ProjectId;
         }
-
-        
+      
         public int Id { get; set; }
         public int ProjectId { get; set; }
     }

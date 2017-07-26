@@ -10,29 +10,7 @@
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Logo</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="index.html">Overview</a></li>
-                <li><a href="create.html">Create new</a></li>
-                <li><a href="clients.html">Clients</a></li>
-                <li><a href="invoice.html">Invoices</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<iframe src="menu.html" style="border: none; width: 100%; height: 50px;" scrolling="no"></iframe>
 <div class="container-fluid text-left">
     <div class="row content">
         <div class="col-sm-2 sidenav">
@@ -43,8 +21,13 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="table-responsive" id="project">
-                        <!-- result from React get goes here--> 
+                        <!-- result from React GET goes here--> 
                     </div>
+                </div>
+                <div class="col-sm-12 text-left" id="newProject">
+                    <button class="btn btn-default preview-add-button" id="btnNewProject" onclick="window.location.href='/create.html'">
+                        <span class="glyphicon glyphicon-plus"></span> Add
+                    </button>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
@@ -59,7 +42,8 @@
 </div>
 
 <script type="text/babel">
-    var App = React.createClass({
+var App = React.createClass({
+    
     getInitialState: function() {
     return {
             data: []
@@ -67,77 +51,72 @@
     },
 
     componentWillMount: function() {
-    var xhr = new XMLHttpRequest();
-    xhr.open("get", this.props.url, true);
-    xhr.onload = function() {
-    var webAPIData = JSON.parse(xhr.responseText);
-    this.setState({ data: webAPIData });
-    }.bind(this);
-    xhr.send();
+        var xhr = new XMLHttpRequest();
+        xhr.open("get", this.props.url, true);
+        xhr.onload = function() {
+            var webAPIData = JSON.parse(xhr.responseText);
+            this.setState({ data: webAPIData });
+            }.bind(this);
+        xhr.send();
     },
     
-    openProject: function(){
-        console.log('Edit button clicked');
-    },
-
     render: function () {
         if (!this.state.data) {
         return null;
-        }
-        console.log(this.state.data);
+    }
+    console.log(this.state.data);
     
     var rows = [];
     this.state.data.forEach(function(project) {
-    var startDate = project.Start.substring(0,10);
-    var endDate;
-    if (project.End != null)
-        endDate = project.End.substring(0,10);
-    else
-        endDate='-';
-    
-    rows.push(
-    <tr key={project.Id}>
-        <td>{project.Name}</td>
-        <td>{project.Description}</td>
-        <td>{startDate}</td>
-        <td>{endDate}</td>
-        <td>{project.ClientName}</td>
-        <td>{project.CostPerHour} DKK</td>
-        <td>Yes/No</td>
-        <td>
-            <div>
-                <a href="tasks.html"> <span className="glyphicon glyphicon-pencil"></span></a>
-            </div>
-        </td>
-    </tr>);
-        });
-        return (
-            <table className="table preview-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Start</th>
-                        <th>End</th>
-                        <th>Client</th>
-                        <th>Cost</th>
-                        <th>Completed</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                
-                <tbody>{rows}</tbody>
-            </table>
-        );
-    }
-    });
+        var startDate = project.Start.substring(0,10);
+        var endDate;
+        if (project.End != null)
+            endDate = project.End.substring(0,10);
+        else
+            endDate='-';
 
-    ReactDOM.render(
-    <App url="http://localhost:53438/api/values/" />,
-    document.getElementById("project"));
+        rows.push(
+        <tr key={project.Id}>
+            <td>{project.Name}</td>
+            <td>{project.Description}</td>
+            <td>{startDate}</td>
+            <td>{endDate}</td>
+            <td>{project.ClientName}</td>
+            <td>{project.CostPerHour} DKK</td>
+            <td>{project.Completed?"Yes":"Not yet"}</td>
+            <td>
+                <div>
+                    <a href="tasks.html"> <span className="glyphicon glyphicon-pencil"></span></a>
+                </div>
+            </td>
+        </tr>);
+            });
+            return (
+                <table className="table preview-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Client</th>
+                            <th>Cost</th>
+                            <th>Completed</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                
+                    <tbody>{rows}</tbody>
+                </table>
+            );
+    }
+});
+
+ReactDOM.render(
+<App url="http://localhost:53438/api/projects/" />,
+document.getElementById("project"));
     
 </script>
-
 
 </body>
 </html>

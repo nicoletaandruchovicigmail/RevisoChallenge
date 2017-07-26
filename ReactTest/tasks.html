@@ -10,35 +10,13 @@
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Logo</a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li><a href="index.html">Overview</a></li>
-                    <li><a href="create.html">Create new</a></li>
-                    <li><a href="clients.html">Clients</a></li>
-                    <li><a href="invoice.html">Invoices</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<iframe src="menu.html" style="border: none; width: 100%; height: 50px;" scrolling="no"></iframe>
     <div class="container-fluid text-left">
         <div class="row content">
             <div class="col-sm-2 sidenav">
             </div>
             <div class="col-sm-8 text-left">
-                <h1>Project: Project 1</h1>
+                <h1>Very important big deal project</h1>
                 <h2>Tasks overview</h2>
                 <hr style="border: 0px">
                 <div class="row">
@@ -49,7 +27,7 @@
                     </div>
                         <div class="form-group">
                             <div class="col-sm-12 text-right">
-                                <button class="btn btn-default preview-add-button" id="saveTasks">
+                                <button class="btn btn-default preview-add-button" id="saveTasks" disabled>
                                     <span class="glyphicon glyphicon-floppy-save"></span> Save
                                 </button>
                             </div>
@@ -67,45 +45,54 @@
     </div>
 
 <script type="text/babel">
-        var App = React.createClass({
-        getInitialState: function() {
+var App = React.createClass({
+    getInitialState: function() {
         return {
-        data: []
+            data: []
         };
-        },
+    },
 
-        componentWillMount: function() {
+    componentWillMount: function() {
         var xhr = new XMLHttpRequest();
         xhr.open("get", this.props.url, true);
         xhr.onload = function() {
-        var webAPIData = JSON.parse(xhr.responseText);
-        this.setState({ data: webAPIData });
+            var webAPIData = JSON.parse(xhr.responseText);
+            this.setState({ data: webAPIData });
         }.bind(this);
         xhr.send();
-        },
+    },
 
-        render: function () {
+    render: function() {
         if (!this.state.data) {
-        return null;
+            return null;
         }
         console.log(this.state.data);
 
         var rows = [];
         this.state.data.forEach(function(task) {
 
-        rows.push(
-        <tr key={task.Id}>
-            <td><div contentEditable>{task.Name}</div></td>
-            <td><div contentEditable>{task.Description}</div></td>
-            <td><div contentEditable>{task.EstimatedHours}</div></td>
-            <td><div contentEditable>{task.actualHours}</div></td>
-            <td><input type="checkbox" /></td>
-        </tr>);
+            rows.push(
+                <tr key={task.Id}>
+                    <td>
+                        <div contentEditable>{task.Name}</div>
+                    </td>
+                    <td>
+                        <div contentEditable>{task.Description}</div>
+                    </td>
+                    <td>
+                        <div contentEditable>{task.EstimatedHours}</div>
+                    </td>
+                    <td>
+                        <div contentEditable>{task.ActualHours}</div>
+                    </td>
+                    <td>
+                        <div contentEditable>{task.Completed ? "Yes" : "Not yet"}</div>
+                    </td>
+                </tr>);
         });
         return (
-
-        <table className="table preview-table">
-            <thead>
+            <table className="table preview-table">
+                <thead>
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
@@ -113,20 +100,18 @@
                     <th>Actual hours</th>
                     <th>Completed</th>
                 </tr>
-            </thead>
+                </thead>
 
-            <tbody>{rows}</tbody>
-        </table>
+                <tbody>{rows}</tbody>
+            </table>
         );
-        }
-        });
+    }
+});
 
-        ReactDOM.render(
-        <App url="http://localhost:53438/api/tasks/3" />,
-        document.getElementById("task"));
+ReactDOM.render(
+    <App url="http://localhost:53438/api/tasks/3"/>,
+    document.getElementById("task"));
 
-    </script>
-
-
+</script>
 </body>
 </html>

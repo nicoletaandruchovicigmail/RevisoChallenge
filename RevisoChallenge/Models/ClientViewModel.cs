@@ -4,7 +4,6 @@ using RevisoChallenge.DAL.Services.Implementation;
 
 namespace RevisoChallenge.Models
 {
-    [Serializable]
     public class ClientViewModel
     {
         public ClientViewModel() { }

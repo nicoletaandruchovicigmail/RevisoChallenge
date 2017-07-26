@@ -10,29 +10,7 @@
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Logo</a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li><a href="index.html">Overview</a></li>
-                    <li><a href="create.html">Create new</a></li>
-                    <li  class="active"><a href="clients.html">Clients</a></li>
-                    <li><a href="invoice.html">Invoices</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <iframe src="menu.html" style="border: none; width: 100%; height: 50px;" scrolling="no"></iframe>
     <div class="container-fluid text-left">
         <div class="row content">
             <div class="col-sm-3 sidenav">
@@ -59,27 +37,27 @@
     </div>
 
 <script type="text/babel">
-        var App = React.createClass({
-        getInitialState: function() {
+var App = React.createClass({
+    getInitialState: function() {
         return {
-        data: []
+            data: []
         };
-        },
+    },
 
-        componentWillMount: function() {
+    componentWillMount: function() {
         var xhr = new XMLHttpRequest();
         xhr.open("get", this.props.url, true);
         xhr.onload = function() {
-        var webAPIData = JSON.parse(xhr.responseText);
-        this.setState({ data: webAPIData });
+            var webAPIData = JSON.parse(xhr.responseText);
+            this.setState({ data: webAPIData });
         }.bind(this);
         xhr.send();
-        },
+    },
 
-        render: function () {
+    render: function () {
         if (!this.state.data) {
-        return null;
-        }
+            return null;
+         }
         console.log(this.state.data);
 
         var rows = [];
@@ -93,7 +71,7 @@
             <td>{client.Company}</td>
             <td>
                 <div>
-                    <a href="#"> <span className="glyphicon glyphicon-pencil"></span></a>
+                    <a href="doesnt_work.html"> <span className="glyphicon glyphicon-pencil"></span></a>
                 </div>
             </td>
         </tr>);
@@ -114,14 +92,12 @@
         </table>
         );
         }
-        });
+    });
 
-        ReactDOM.render(
-        <App url="http://localhost:53438/api/clients/" />,
-        document.getElementById("client"));
+    ReactDOM.render(
+    <App url="http://localhost:53438/api/clients/" />,
+    document.getElementById("client"));
 
-    </script>
-
-
+</script>
 </body>
 </html>

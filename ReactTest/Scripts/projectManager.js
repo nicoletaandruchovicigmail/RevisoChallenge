@@ -3,18 +3,21 @@
     var project = {
        /* $type: 'RevisoChallenge.Models.ProjectViewModel, RevisoChallenge',*/
         Name: $("#name").val(),
-        Description: $("#description").val()
+        Description: $("#description").val(),
+        Start: $("#startdate").val(),
+        End: $("#enddate").val(),
+        Cost: $("#cost").val() 
     };
     $.ajax(
         {
             type: "POST",
-            url: 'http://localhost:53438/api/values/',
+            url: 'http://localhost:53438/api/projects/',
             data: JSON.stringify(project),
             contentType: "application/json",
             success: function (data) {
-                if (data.status == "success")
+                if (data.status === "success")
                     alert("success");
-                else if (data.status == "error")
+                else if (data.status === "error")
                    alert(data.error_message);                
             },
             error: function (error) {

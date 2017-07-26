@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using RevisoChallenge.DAL.Entities;
 using RevisoChallenge.DAL.Services.Implementation;
 
 namespace RevisoChallenge.Models
 {
-    [Serializable]
     public class ProjectViewModel
     {
         public ProjectViewModel() { }
@@ -24,6 +22,7 @@ namespace RevisoChallenge.Models
             Cost = GetProjectCost();
 
             //Completed -> when all tasks are completed
+            Completed = IsProjectCompleted();
         }
 
         private string GetClientName(int clientId)
@@ -34,7 +33,7 @@ namespace RevisoChallenge.Models
             return client.Name;
         }
 
-        public float GetProjectCost()
+        private float GetProjectCost()
         {
             var services = new DalServices();
 
@@ -53,6 +52,24 @@ namespace RevisoChallenge.Models
          return cost;
         }
 
+
+        private bool IsProjectCompleted()
+        {
+            var services = new DalServices();
+            foreach (var task in services.GetTasks())
+            {
+                var taskModel=new TaskViewModel(task);
+                if (!taskModel.Completed)
+                    return false;
+            }
+            return true;
+        }
+
+        private string GetYesNo()
+        {
+            return Completed ? "Yes" : "Not yet";
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -61,5 +78,6 @@ namespace RevisoChallenge.Models
         public string ClientName { get; set; }
         public decimal CostPerHour { get; set; }
         public float Cost { get; set; }
+        public bool Completed { get; set; }
     }
 }

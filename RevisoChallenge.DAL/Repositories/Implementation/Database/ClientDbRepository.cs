@@ -2,28 +2,21 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RevisoChallenge.DAL.Entities;
 using RevisoChallenge.DAL.Repositories.Model.Database;
 
 namespace RevisoChallenge.DAL.Repositories.Implementation.Database
 {
-    class ClientDbRepository : IClientDbRepository
+    internal class ClientDbRepository : IClientDbRepository
     {
         private RevisoChallengeEntities _context;
 
         public ClientDbRepository(DbContext context)
         {
-            _context = (RevisoChallengeEntities)context;
+            _context = (RevisoChallengeEntities) context;
         }
 
         DbContext IDbRepository.GetContext()
-        {
-            return _context;
-        }
-
-        public RevisoChallengeEntities GetContext()
         {
             return _context;
         }
@@ -92,6 +85,11 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
         public IList<Client> GetAll()
         {
             return GetContext().Clients.ToList();
+        }
+
+        public RevisoChallengeEntities GetContext()
+        {
+            return _context;
         }
     }
 }
