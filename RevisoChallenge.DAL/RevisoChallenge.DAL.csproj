@@ -114,6 +114,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Database\script.sql" />
     <Content Include="Entities\RevisoChallengeModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>RevisoChallengeModel.edmx</DependentUpon>
