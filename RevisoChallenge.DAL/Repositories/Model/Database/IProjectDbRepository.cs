@@ -10,16 +10,4 @@ namespace RevisoChallenge.DAL.Repositories.Model.Database
     public interface IProjectDbRepository: IRepository<Project>, IDbRepository
     {
     }
-
-    interface ITaskDbRepository : IRepository<Task>, IDbRepository
-    {
-    }
-
-    interface IClientDbRepository : IRepository<Client>, IDbRepository
-    {
-    }
-
-    interface IInvoiceDbRepository : IRepository<Invoice>, IDbRepository
-    {
-    }
 }

@@ -16,6 +16,11 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
             _context = (RevisoChallengeEntities) context;
         }
 
+        public RevisoChallengeEntities GetContext()
+        {
+            return _context;
+        }
+
         DbContext IDbRepository.GetContext()
         {
             return _context;
@@ -26,11 +31,22 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
             _context = (RevisoChallengeEntities) context;
         }
 
+        public Client Get(int id)
+        {
+            return GetContext().Clients.FirstOrDefault(d => d.Id == id);
+        }
+
+        public IList<Client> GetAll()
+        {
+            return GetContext().Clients.ToList();
+        }
+
         public bool Create(Client item)
         {
             try
             {
                 GetContext().Clients.Add(item);
+                GetContext().SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -44,13 +60,13 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
         {
             try
             {
-                GetContext().Clients.Attach(item);
-                var entry = GetContext().Entry(item);
-                //entry.State = EntityState.Modified;
-                entry.Property("Name").IsModified = true;
-                //other properties
+                var originalItem = GetContext().Clients.FirstOrDefault(x => x.Id == item.Id);
+                var entry = GetContext().Entry(originalItem);
 
+                entry.CurrentValues.SetValues(item);
+                entry.State = EntityState.Modified;
                 GetContext().SaveChanges();
+
                 return true;
             }
             catch (Exception e)
@@ -64,7 +80,6 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
         {
             try
             {
-                GetContext().Clients.Attach(item);
                 GetContext().Clients.Remove(item);
                 GetContext().SaveChanges();
 
@@ -75,21 +90,6 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
                 Console.WriteLine(e);
                 return false;
             }
-        }
-
-        public Client Get(int id)
-        {
-            return GetContext().Clients.Find(id);
-        }
-
-        public IList<Client> GetAll()
-        {
-            return GetContext().Clients.ToList();
-        }
-
-        public RevisoChallengeEntities GetContext()
-        {
-            return _context;
         }
     }
 }

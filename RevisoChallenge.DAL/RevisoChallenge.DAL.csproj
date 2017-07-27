@@ -93,12 +93,13 @@
     <Compile Include="Repositories\Implementation\Database\InvoiceDbRepository.cs" />
     <Compile Include="Repositories\Implementation\Database\ProjectDbRepository.cs" />
     <Compile Include="Repositories\Implementation\Database\TaskDbRepository.cs" />
-    <Compile Include="Repositories\Implementation\Mock\MockProjectDbRepository.cs" />
+    <Compile Include="Repositories\Model\Database\IClientDbRepository.cs" />
     <Compile Include="Repositories\Model\Database\IDbRepository.cs" />
+    <Compile Include="Repositories\Model\Database\IInvoiceDbRepository.cs" />
     <Compile Include="Repositories\Model\Database\IProjectDbRepository.cs" />
+    <Compile Include="Repositories\Model\Database\ITaskDbRepository.cs" />
     <Compile Include="Repositories\Model\IRepository.cs" />
     <Compile Include="Services\Implementation\DALServices.cs" />
-    <Compile Include="Services\Implementation\UnityBroker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

@@ -4,70 +4,21 @@ using RevisoChallenge.DAL.Services.Implementation;
 
 namespace RevisoChallenge.Models
 {
-    public class ProjectViewModel
+    public class ProjectViewModel: IEquatable<ProjectViewModel>
     {
         public ProjectViewModel() { }
 
-        public ProjectViewModel(Project project)
+        public ProjectViewModel(Project project, string clientName, decimal cost, bool isProjectCompleted)
         {
             Id = project.Id;
             Name = project.Name;
             Description = project.Description;
             Start = project.Start;
             End = project.End;
-            ClientName = GetClientName(project.ClientId);
-            CostPerHour = project.CostPerHour;
-
-            // cost for all tasks depending on cost per hour and hours spent
-            Cost = GetProjectCost();
-
-            //Completed -> when all tasks are completed
-            Completed = IsProjectCompleted();
-        }
-
-        private string GetClientName(int clientId)
-        {
-            var service = new DalServices();
-            var client  = service.GetClient(clientId);
-
-            return client.Name;
-        }
-
-        private float GetProjectCost()
-        {
-            var services = new DalServices();
-
-            float cost = 0;
-            foreach (var task in services.GetTasks())
-            {
-                if (task.ProjectId == Id)
-                {
-                   float y = task.ActualHours.GetValueOrDefault();
-                   if (Math.Abs(y) > 0.000001)
-                   {
-                       cost += y * (float)CostPerHour;
-                   }
-                 }
-            }
-         return cost;
-        }
-
-
-        private bool IsProjectCompleted()
-        {
-            var services = new DalServices();
-            foreach (var task in services.GetTasks())
-            {
-                var taskModel=new TaskViewModel(task);
-                if (!taskModel.Completed)
-                    return false;
-            }
-            return true;
-        }
-
-        private string GetYesNo()
-        {
-            return Completed ? "Yes" : "Not yet";
+            ClientId = project.ClientId;
+            ClientName = clientName;
+            Cost = cost;
+            Completed = isProjectCompleted;
         }
 
         public int Id { get; set; }
@@ -75,9 +26,19 @@ namespace RevisoChallenge.Models
         public string Description { get; set; }
         public DateTime Start { get; set; }
         public DateTime? End { get; set; }
+        public int ClientId { get; set; }
         public string ClientName { get; set; }
-        public decimal CostPerHour { get; set; }
-        public float Cost { get; set; }
+        public decimal Cost { get; set; }
         public bool Completed { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as ProjectViewModel);
+        }
+
+        public bool Equals(ProjectViewModel obj)
+        {
+            return (Id == obj.Id && Name==obj.Name && ClientId==obj.ClientId && Cost==obj.Cost && Completed==obj.Completed);   
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace RevisoChallenge.Models
     {
         public TaskViewModel() { }
 
-        public TaskViewModel(Task task)
+        public TaskViewModel(Task task, string projectName, decimal cost, bool completed)
         {
             Id = task.Id;
             Name = task.Name;
@@ -18,9 +18,9 @@ namespace RevisoChallenge.Models
             ActualHours = task.ActualHours;
             End = task.End;            
             ProjectId = task.ProjectId;
-            ProjectName = GetProjectName(ProjectId);
-            Cost = GetTaskCostPerHour();
-            Completed = IsTaskCompleted();
+            ProjectName = projectName;
+            Cost = cost;
+            Completed = completed;
         }
 
         public int Id { get; set; }
@@ -34,29 +34,5 @@ namespace RevisoChallenge.Models
         public string ProjectName { get; set; }
         public decimal Cost { get; set; }
         public bool Completed { get; set; }
-
-        public string GetProjectName(int projectId)
-        {
-            var service = new DalServices();
-            var project = service.GetProject(ProjectId);
-
-            return project != null ? project.Name : string.Empty;
-        }
-
-        private decimal GetTaskCostPerHour()
-        {
-            var service = new DalServices();
-            var project = service.GetProject(ProjectId);
-
-            return project.CostPerHour;
-        }
-
-        private bool IsTaskCompleted()
-        {
-            // needs a more clever implementation 
-            if (End.HasValue && End != default(DateTime))
-                return true;
-            return false;
-        }
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using RevisoChallenge.DAL.Entities;
-using RevisoChallenge.DAL.Repositories.Model;
 using RevisoChallenge.DAL.Repositories.Model.Database;
 
 namespace RevisoChallenge.DAL.Repositories.Implementation.Database
@@ -14,7 +13,6 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
 
         public ProjectDbRepository(DbContext context)
         {
-            //_context = context;
             _context = (RevisoChallengeEntities) context;
         }
 
@@ -33,12 +31,22 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
             _context = (RevisoChallengeEntities) context;
         }
 
+        public Project Get(int id)
+        {
+            return GetContext().Projects.FirstOrDefault(d => d.Id == id);
+        }
+
+        public IList<Project> GetAll()
+        {
+            return GetContext().Projects.ToList();
+        }
 
         public bool Create(Project item)
         {
             try
             {
                 GetContext().Projects.Add(item);
+                GetContext().SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -52,13 +60,13 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
         {
             try
             {
-                GetContext().Projects.Attach(item);
-                var entry = GetContext().Entry(item);
-                //entry.State = EntityState.Modified;
-                entry.Property("Name").IsModified = true;
-                //other properties
+                var originalItem = GetContext().Projects.FirstOrDefault(x=>x.Id==item.Id);
+                var entry = GetContext().Entry(originalItem);
 
+                entry.CurrentValues.SetValues(item);
+                entry.State = EntityState.Modified;
                 GetContext().SaveChanges();
+
                 return true;
             }
             catch (Exception e)
@@ -84,16 +92,5 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
                 return false;
             }      
         }
-
-        public Project Get(int id)
-        {
-            return GetContext().Projects.Find(id);
-        }
-
-        public IList<Project> GetAll()
-        {
-            return GetContext().Projects.ToList();
-        }
-
     }
 }

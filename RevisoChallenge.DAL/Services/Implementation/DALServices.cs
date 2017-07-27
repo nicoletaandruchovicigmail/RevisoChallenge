@@ -1,55 +1,84 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using RevisoChallenge.DAL.Entities;
 using RevisoChallenge.DAL.Repositories.Implementation.Database;
-using RevisoChallenge.DAL.Repositories.Implementation.Mock;
 using RevisoChallenge.DAL.Repositories.Model.Database;
 
 namespace RevisoChallenge.DAL.Services.Implementation
 {
     public class DalServices
     {
-        public IList<Project> GetProjects()
-        {
-            var context = new RevisoChallengeEntities();
-            IProjectDbRepository projectRepository = new ProjectDbRepository(context);
+        private readonly IProjectDbRepository _projectDbRepository;
+        private readonly IClientDbRepository _clientDbRepository;        
 
-            return projectRepository.GetAll();
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public DalServices() : this(new ProjectDbRepository(new RevisoChallengeEntities()),new ClientDbRepository(new RevisoChallengeEntities()))
+        {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="projectDbRepository"></param>
+        /// <param name="clientDbRepository"></param>
+        public DalServices(IProjectDbRepository projectDbRepository,IClientDbRepository clientDbRepository)
+        {
+            _projectDbRepository = projectDbRepository;
+            _clientDbRepository = clientDbRepository;            
+        }
+
+        //Methods for Project repository
         public Project GetProject(int id)
         {
-            var context = new RevisoChallengeEntities();
-            IProjectDbRepository projectRepository = new ProjectDbRepository(context);
+            return _projectDbRepository.Get(id);
+        }
 
-            return projectRepository.Get(id);
+        public IList<Project> GetProjects()
+        {          
+            return _projectDbRepository.GetAll();
         }
 
         public void AddProject(Project project)
         {
-            var context = new RevisoChallengeEntities();
-            IProjectDbRepository projectRepository = new ProjectDbRepository(context);
-            projectRepository.Create(project);
+            _projectDbRepository.Create(project);            
+        }
 
-            context.SaveChanges();
+        public void UpdateProject(Project project)
+        {
+            _projectDbRepository.Update(project);
+        }
+
+        //Methods for Client repository
+        public Client GetClient(int id)
+        {
+            return _clientDbRepository.Get(id);
         }
 
         public IList<Client> GetClients()
-        {
-            var context = new RevisoChallengeEntities();
-            IClientDbRepository clientRepository = new ClientDbRepository(context);
+        {        
+            return _clientDbRepository.GetAll();
+        }
 
-            return clientRepository.GetAll();
+        public void AddClient(Client client)
+        {
+            _clientDbRepository.Create(client);
+        }
+
+        public void UpdateClient(Client client)
+        {
+            _clientDbRepository.Update(client);
         }
 
 
-        public Client GetClient(int id)
+        // Methods for Task repository
+
+        public Task GetTask(int id)
         {
             var context = new RevisoChallengeEntities();
-            IClientDbRepository clientRepository = new ClientDbRepository(context);
+            ITaskDbRepository clientRepository = new TaskDbRepository(context);
 
             return clientRepository.Get(id);
         }
@@ -62,42 +91,20 @@ namespace RevisoChallenge.DAL.Services.Implementation
             return taskRepository.GetAll();
         }
 
-        public Task GetTask(int id)
+        public IList<Task> GetTasksByProjectId(int projectId)
         {
             var context = new RevisoChallengeEntities();
-            ITaskDbRepository clientRepository = new TaskDbRepository(context);
+            ITaskDbRepository taskRepository = new TaskDbRepository(context);
 
-            return clientRepository.Get(id);
+            return (taskRepository.GetAll().Where(x => x.ProjectId == projectId)).ToList();
         }
 
-        void AddTask(Task task)
+        private void AddTask(Task task)
         {
             DbContext context = new RevisoChallengeEntities();
             ITaskDbRepository projectRepository = new TaskDbRepository(context);
             projectRepository.Create(task);
         }
-
-        void AddClient(Client client)
-        {
-            DbContext context = new RevisoChallengeEntities();
-            IClientDbRepository projectRepository = new ClientDbRepository(context);
-            projectRepository.Create(client);
-        }
-
-        void AddInvoice(Invoice invoice)
-        {
-            DbContext context = new RevisoChallengeEntities();
-            IInvoiceDbRepository projectRepository = new InvoiceDbRepository(context);
-            projectRepository.Create(invoice);
-        }
-
-        Invoice CreateInvoice(Project project, Client client)
-        {
-            var invoice = new Invoice();
-
-            return invoice;
-        }
-
 
     }
 }

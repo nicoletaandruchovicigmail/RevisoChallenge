@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using RevisoChallenge.DAL.Entities;
 using RevisoChallenge.DAL.Repositories.Model.Database;
 
@@ -35,6 +34,7 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
         public bool Create(Task item)
         {
             GetContext().Tasks.Add(item);
+            GetContext().SaveChanges();
             return true;
         }
 
@@ -42,13 +42,11 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
         {
             try
             {
-                GetContext().Tasks.Attach(item);
-                var entry = GetContext().Entry(item);
+                var originalItem = GetContext().Tasks.FirstOrDefault(x => x.Id == item.Id);
+                var entry = GetContext().Entry(originalItem);
 
-                //entry.State = EntityState.Modified;
-                entry.Property("Name").IsModified = true;
-                //other properties
-
+                entry.CurrentValues.SetValues(item);
+                entry.State = EntityState.Modified;
                 GetContext().SaveChanges();
 
                 return true;
@@ -64,11 +62,9 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
         {
             try
             {
-                GetContext().Tasks.Attach(item);
                 GetContext().Tasks.Remove(item);
-                //GetContext().Entry(item).State=EntityState.Deleted;
-
                 GetContext().SaveChanges();
+
                 return true;
             }
             catch (Exception e)
@@ -80,7 +76,7 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
 
         public Task Get(int id)
         {
-            return GetContext().Tasks.Find(id);
+            return GetContext().Tasks.FirstOrDefault(d => d.Id == id);
         }
 
         public IList<Task> GetAll()

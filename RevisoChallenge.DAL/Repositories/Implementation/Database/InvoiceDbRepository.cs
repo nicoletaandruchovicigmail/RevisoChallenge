@@ -33,11 +33,17 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
             _context = (RevisoChallengeEntities)context;
         }
 
+        public IList<Invoice> GetAll()
+        {
+            return GetContext().Invoices.ToList();
+        }
+
         public bool Create(Invoice item)
         {
             try
             {
                 GetContext().Invoices.Add(item);
+                GetContext().SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -51,13 +57,13 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
         {
             try
             {
-                GetContext().Invoices.Attach(item);
-                var entry = GetContext().Entry(item);
-                //entry.State = EntityState.Modified;
-                entry.Property("Name").IsModified = true;
-                //other properties
+                var originalItem = GetContext().Invoices.FirstOrDefault(x => x.Id == item.Id);
+                var entry = GetContext().Entry(originalItem);
 
+                entry.CurrentValues.SetValues(item);
+                entry.State = EntityState.Modified;
                 GetContext().SaveChanges();
+
                 return true;
             }
             catch (Exception e)
@@ -71,7 +77,6 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
         {
             try
             {
-                GetContext().Invoices.Attach(item);
                 GetContext().Invoices.Remove(item);
                 GetContext().SaveChanges();
 
@@ -87,11 +92,6 @@ namespace RevisoChallenge.DAL.Repositories.Implementation.Database
         public Invoice Get(int id)
         {
             return GetContext().Invoices.Find(id);
-        }
-
-        public IList<Invoice> GetAll()
-        {
-            return GetContext().Invoices.ToList();
         }
     }
 }
